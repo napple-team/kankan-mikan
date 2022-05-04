@@ -49,23 +49,41 @@ const makeManifestFile = async (targetBrowser: Browser) => {
       distPath('manifest.json', targetBrowser),
       JSON.stringify(manifestJson, null, 1)
     );
+  } else if (targetBrowser === 'chrome') {
+    const chromeJson = JSON.parse(await fs.readFile('chrome.json', 'utf8'));
+    const manifestJson = { ...baseManifestJson, ...chromeJson };
+    fs.writeFile(
+      distPath('manifest.json', targetBrowser),
+      JSON.stringify(manifestJson, null, 1)
+    );
   } else {
     fs.copyFile('manifest.json', distPath('manifest.json', targetBrowser));
   }
 };
 
 const buildExtension = async (targetBrowser: Browser) => {
-  await fs.mkdir(distPath('background', targetBrowser), { recursive: true });
   await fs.mkdir(distPath('option', targetBrowser), { recursive: true });
   await fs.mkdir(distPath('icons', targetBrowser), { recursive: true });
 
-  build({
-    entryPoints: ['src/background/index.ts'],
-    bundle: true,
-    outdir: distPath('background', targetBrowser),
-    watch: watchOption(targetBrowser),
-    sourcemap: devFlag ? 'inline' : false,
-  });
+  if (targetBrowser === 'firefox') {
+    await fs.mkdir(distPath('background', targetBrowser), { recursive: true });
+    build({
+      entryPoints: ['src/background/index.ts'],
+      bundle: true,
+      outdir: distPath('background', targetBrowser),
+      watch: watchOption(targetBrowser),
+      sourcemap: devFlag ? 'inline' : false,
+    });
+  } else if (targetBrowser === 'chrome') {
+    await fs.mkdir(distPath('service_worker', targetBrowser), { recursive: true });
+    build({
+      entryPoints: ['src/service_worker/index.ts'],
+      bundle: true,
+      outdir: distPath('service_worker', targetBrowser),
+      watch: watchOption(targetBrowser),
+      sourcemap: devFlag ? 'inline' : false,
+    });
+  }
 
   // build tsx by esbuild
   build({

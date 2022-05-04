@@ -1,5 +1,22 @@
 import browser from 'webextension-polyfill';
-import { Post } from '../lib/post';
+import { Post as PostBase } from '../lib/post';
+
+class Post extends PostBase {
+  constructor() {
+    super();
+  }
+
+  async submit(url: string) {
+    await fetch(
+      this.postUrl,
+      {
+        method: 'POST',
+        body: this.generate(url),
+        headers: { 'Content-Type': this.contentType }
+      }
+    );
+  }
+}
 
 const post: Post = new Post();
 
@@ -17,21 +34,23 @@ const notification = async (message: string) => {
 };
 
 browser.contextMenus.create({
+  id: 'kankan-mikan',
   type: 'normal',
   title: 'Post url with kankan-mikan',
   contexts: ['link'],
-  onclick: async (info) => {
-    if (!post.isStandby) await notification('Please setup')
-    try {
-      if (info.linkUrl && (post.isFilteredUrl() || post.validate(info.linkUrl))) {
-        await post.submit(info.linkUrl);
-        await notification('Posted!');
-      } else {
-        await notification('Invalid url');
-      }
-    } catch (err: any) {
-      await notification(`${err}`);
+});
+
+browser.contextMenus.onClicked.addListener(async (info) => {
+  if (!post.isStandby) await notification('Please setup')
+  try {
+    if (info.linkUrl && (post.isFilteredUrl() || post.validate(info.linkUrl))) {
+      await post.submit(info.linkUrl);
+      await notification('Posted!');
+    } else {
+      await notification('Invalid url');
     }
+  } catch (err: any) {
+    await notification(`${err}`);
   }
 });
 

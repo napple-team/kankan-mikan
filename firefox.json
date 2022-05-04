@@ -1,7 +1,12 @@
 {
   "browser_specific_settings": {
     "gecko": {
-      "id": "mikan@example.com"
+      "id": "kankan-mikan@napple.team"
     }
+  },
+  "background": {
+    "scripts": [
+      "background/index.js"
+    ]
   }
 }

@@ -33,7 +33,7 @@ export class Post {
   }
 
   async save() {
-    browser.storage.local.set({
+    return browser.storage.local.set({
       template: this.template,
       postUrl: this.postUrl,
       contentType: this.contentType,
@@ -59,7 +59,6 @@ export class Post {
   }
 
   async submit(url: string) {
-    if (!this.postUrl) return;
     await axios.post(
       this.postUrl,
       this.generate(url),

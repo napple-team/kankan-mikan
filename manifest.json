@@ -14,10 +14,5 @@
   ],
   "options_ui": {
     "page": "option/index.html"
-  },
-  "background": {
-    "scripts": [
-      "background/index.js"
-    ]
   }
 }

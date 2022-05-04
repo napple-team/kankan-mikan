@@ -2,7 +2,7 @@
 
 从c*・ヮ・§
 
-Twitter の URL を右クリックから [koresuki-support](https://github.com/napple-team/koresuki-support) へ送信することができるブラウザ拡張
+ブラウザの URL を右クリックした際のメニューから特定の URL にリンクの URL を含むテキストデータを POST できるブラウザ拡張機能
 
 ## License
 
@@ -14,4 +14,4 @@ Twitter の URL を右クリックから [koresuki-support](https://github.com/n
 
 ## Author
 
-* windyakin
+* windyakin (Twitter: [@MITLicense](https://twitter.com/MITLicense))

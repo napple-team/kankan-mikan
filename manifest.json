@@ -1,27 +1,23 @@
 {
   "manifest_version": 2,
   "name": "かんかんみかん",
-  "version": "1.1.0",
-  "description": "TwitterのURLをWebhookに送信します",
-  "applications": {
-    "gecko": {
-      "id": "mikan@example.com"
-    }
-  },
+  "version": "2.0.0",
+  "description": "右クリックしたリンクのURLをWebhookに送信します",
   "icons": {
     "48": "icons/icon48.png",
     "96": "icons/icon96.png"
   },
   "permissions": [
     "contextMenus",
-    "storage"
+    "storage",
+    "notifications"
   ],
   "options_ui": {
-    "page": "options.html"
+    "page": "option/index.html"
   },
   "background": {
     "scripts": [
-      "mikan.js"
+      "background/index.js"
     ]
   }
 }

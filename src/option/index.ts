@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
 import './theme.css'
-import Option from './option.vue'
+import ExtOption from './ext-options.vue'
 
-createApp(Option).mount('#app')
+createApp(ExtOption).mount('#app')

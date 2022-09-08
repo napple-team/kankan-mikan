@@ -49,7 +49,7 @@ browser.contextMenus.onClicked.addListener(async (info) => {
     } else {
       await notification('Invalid url');
     }
-  } catch (err: any) {
+  } catch (err) {
     await notification(`${err}`);
   }
 });

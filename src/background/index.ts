@@ -29,7 +29,7 @@ browser.contextMenus.create({
       } else {
         await notification('Invalid url');
       }
-    } catch (err: any) {
+    } catch (err) {
       await notification(`${err}`);
     }
   }

@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "axios": "0.27.2",
-    "esbuild": "0.16.14",
+    "esbuild": "0.25.0",
     "mustache": "4.2.0",
     "vue": "3.2.45",
     "webextension-polyfill": "0.10.0"
